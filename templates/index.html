@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Video Info Viewer</title>
+</head>
+<body>
+
+<h1>Video Information</h1>
+
+<form method="POST">
+    <input
+        type="text"
+        name="url"
+        placeholder="Video URL"
+        required>
+    <button type="submit">
+        Get Info
+    </button>
+</form>
+
+{% if error %}
+<p>{{ error }}</p>
+{% endif %}
+
+{% if info %}
+<h2>{{ info.title }}</h2>
+
+<img src="{{ info.thumbnail }}" width="400">
+
+<p>Uploader: {{ info.uploader }}</p>
+<p>Duration: {{ info.duration }} sec</p>
+
+<h3>Formats</h3>
+
+<ul>
+{% for f in info.formats %}
+<li>
+{{ f.height }}p | {{ f.ext }} | {{ f.format }}
+</li>
+{% endfor %}
+</ul>
+
+{% endif %}
+
+</body>
+</html>
